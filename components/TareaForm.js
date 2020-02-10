@@ -1,17 +1,18 @@
 import React, { Component } from "react";
+import { View } from 'react-native'
+import { Button, TextInput } from "react-native-paper";
 
 export default class TareaForm extends Component {
   state = {};
 
-  onInputChange(event) {
+  onInputChange(text, name) {
     const { tarea, onTareaChange } = this.props;
-    tarea[event.target.name] = event.target.value;
+    tarea[name] = text;
     // this.setState({ tarea });
     onTareaChange(tarea);
   }
 
-  submitForm(event) {
-    event.preventDefault();
+  submitForm() {
     const { onSubmit } = this.props;
     const { tarea } = this.props;
     onSubmit(tarea);
@@ -20,19 +21,17 @@ export default class TareaForm extends Component {
   render() {
     const { tarea } = this.props;
     return (
-      <form onSubmit={event => this.submitForm(event)}>
-        <input
-          name="descripcion"
+      <View >
+        <TextInput
           value={tarea.descripcion || ""}
-          onChange={event => this.onInputChange(event)}
+          onChangeText={text => this.onInputChange(text, 'descripcion')}
         />
-        <input
-          name="hora"
+        <TextInput
           value={tarea.hora || ""}
-          onChange={event => this.onInputChange(event)}
+          onChangeText={text => this.onInputChange(text, 'hora')}
         />
-        <button type="submit">Guardar</button>
-      </form>
+        <Button onPress={() => this.submitForm()}>Guardar</Button>
+      </View>
     );
   }
 }

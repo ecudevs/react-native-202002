@@ -10,7 +10,7 @@ const tareasList = [
   { descripcion: "Hacer deberes", hora: "9 am", realizado: false }
 ];
 
-export default function Todo({ input }) {
+export default function Todo({ navigation }) {
   let [loading, setLoading] = useState(false);
   let [tarea, setTarea] = useState({});
   let [mensaje, setMensaje] = useState("Cargando!");
@@ -37,7 +37,8 @@ export default function Todo({ input }) {
 
   return (
     <View>
-      {/* <TareaForm
+      <Button onPress={() => navigation.navigate('Profile', { nombre: "Thian" })}>Ir a perfil</Button>
+      <TareaForm
         tarea={tarea}
         onTareaChange={tarea => onInputChange(tarea)}
         onSubmit={tarea => {
@@ -53,7 +54,7 @@ export default function Todo({ input }) {
             setTareas([...tareas]);
           }
         }}
-      /> */}
+      />
       <List.Section>
         <List.Subheader>Tareas</List.Subheader>
         {tareas.map((item, index) => {
