@@ -7,9 +7,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Profile from "./components/Profile";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Clientes from "./containers/Clientes";
+import ClienteContainer from "./containers/ClienteContainer";
 import { Provider as ReduxProvider } from "react-redux";
 import store from './store'
+import Header from "./components/Header";
 
 const Tab = createBottomTabNavigator();
 
@@ -18,10 +19,11 @@ export default function App() {
     <ReduxProvider store={store}>
       <PaperProvider>
         <NavigationContainer>
+          <Header title="My app" />
           <Tab.Navigator>
             <Tab.Screen
               name="Clientes"
-              component={Clientes}
+              component={ClienteContainer}
               options={{ title: "Clientes" }}
             />
             <Tab.Screen
@@ -29,7 +31,6 @@ export default function App() {
               component={Profile}
               options={{ title: "Profile" }}
             />
-
           </Tab.Navigator>
         </NavigationContainer>
       </PaperProvider>

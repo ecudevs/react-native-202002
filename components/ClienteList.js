@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { List, IconButton, Avatar } from 'react-native-paper';
 
-export default function ClienteList({ clientes }) {
+export default function ClienteList({ clientes, onClienteEdit }) {
     return (
         <List.Section>
             <List.Subheader>Clientes</List.Subheader>
@@ -18,7 +18,7 @@ export default function ClienteList({ clientes }) {
                                 <IconButton
                                     icon="camera"
                                     size={20}
-                                    onPress={() => console.log('Pressed')}
+                                    onPress={() => onClienteEdit(item)}
                                 />
                                 <IconButton
                                     icon="camera"

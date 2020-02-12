@@ -1,3 +1,5 @@
+import { CLIENTE_CHANGE } from "../actions/actionTypes";
+
 let defaultState = {
     loading: false,
     cliente: {},
@@ -28,6 +30,12 @@ let defaultState = {
 
 const clienteReducer = (state = defaultState, action) => {
     switch (action.type) {
+        case CLIENTE_CHANGE: return {
+            ...state, cliente: { ...action.cliente }
+        }
+        case 'CLIENTE_SAVE_SUCCESS': return {
+            ...state, clientes: [...state.clientes, action.cliente]
+        }
         case "SAVE_CLIENTE":
             return { ...state, loading: true, clientes: [...state.clientes, action.cliente] };
         default:

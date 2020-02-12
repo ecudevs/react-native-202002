@@ -1,51 +1,42 @@
 import React from 'react';
 import ClienteList from '../components/ClienteList';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
+import { FAB } from 'react-native-paper';
 
-// const clientes = [
-//     {
-//         nombre: "Cristhian Lopez",
-//         foto: "",
-//         correo: "thianlopezz@gmail.com",
-//         numero: "0990901765",
-//         etiqueta: ["react", "contactado"]
-//     },
-//     {
-//         nombre: "Ricardo García",
-//         foto: "",
-//         correo: "ragseg@donargento.com",
-//         numero: "0998562048",
-//         etiqueta: ["power-bi"]
-//     },
-//     {
-//         nombre: "Paula Iniguez",
-//         foto: "",
-//         correo: "hol@ecudevs.com",
-//         numero: "0993648292",
-//         etiqueta: ["python"]
-//     }
-// ];
-
-
-function Clientes(props) {
-    debugger;
+function Clientes({ navigation, cliente, clientes, onClienteChange }) {
     return (
-        <View>
-            <ClienteList clientes={props.clientes} />
+        <View style={{ flex: 1 }}>
+            <Text>{cliente.nombre || 'Cliente no seleccionado'}</Text>
+            <ClienteList clientes={clientes} onClienteEdit={(cliente) => onClienteChange(cliente)} />
+            <FAB
+                style={{
+                    position: 'absolute',
+                    margin: 16,
+                    right: 0,
+                    bottom: 0,
+                }}
+                icon="plus"
+                onPress={() => navigation.navigate('ClieteForm')}
+            />
         </View>
     )
 }
 
 const mapStateToProps = ({ clienteState }) => {
-    debugger;
     const { clientes, cliente } = clienteState;
     return {
         clientes,
-        clienteData: cliente
+        cliente
     }
 }
 
-export default connect(mapStateToProps, {})(Clientes);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onClienteChange: (cliente) => dispatch({ type: 'CLIENTE_CHANGE', cliente })
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Clientes);
 
 
